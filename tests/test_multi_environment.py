@@ -1,6 +1,7 @@
 import requests
 # piu
 
+
 class TestPytestMultiEnv:
     def test_get_multi_env(
             self, env_config, env_request_data, env_response_data
