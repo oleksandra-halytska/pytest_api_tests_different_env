@@ -1,6 +1,6 @@
 {
   "getAPI": "",
-  "postAPI":{
+  "postAPI": {
     "title": "foo",
     "body": "bar",
     "userId": 1
