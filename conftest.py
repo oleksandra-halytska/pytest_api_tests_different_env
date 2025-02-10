@@ -16,7 +16,6 @@ def env_config(request):
 def env_request_data(request):
     env = os.getenv('ENV', 'dev')
     with open(f'data/{env}_request_data.json', 'r') as request_data_file:
-        breakpoint()
         request_data = json.load(request_data_file)
 
     return request_data
