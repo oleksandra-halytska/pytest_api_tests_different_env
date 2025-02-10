@@ -23,15 +23,27 @@ jobs:
 
     - name: Test with pytest
       run: |
-        ENV=dev pytest        
-    - name: Archive Pytest allure test report
-      uses: actions/upload-artifact@v3
+        ENV=dev pytest
+    - name: Load test report history
+      if: always()
+      uses: actions/checkout@v4
+      continue-on-error: true
       with:
-        name: Pytest-allure-report
-        path: allure-results
-          
-    - name: Upload Pytest allure report to GitHub
-      uses: actions/upload-artifact@v3
+        ref: gh-pages-api
+        path: gh-pages-api
+
+    - name: Build test report
+      if: always()
+      uses: simple-elf/allure-report-action@v1.7
       with:
-        name: Pytest-allure-report
-        path: allure-results
+        gh_pages: allure-report
+        allure_results: build/allure-results
+        allure_history: allure-history
+
+    - name: Publish test report
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages-api
+        publish_dir: allure-history
