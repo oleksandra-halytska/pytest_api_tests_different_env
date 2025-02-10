@@ -1,6 +1,7 @@
 import pytest
 import json
 import os
+import allure
 
 
 @pytest.fixture(scope="session")
@@ -8,6 +9,12 @@ def env_config(request):
     env = os.getenv('ENV', 'dev')
     with open(f'config/{env}_config.json', 'r') as config_file:
         config = json.load(config_file)
+
+    allure.attach(
+        json.dumps(config, indent=2),
+        name="env_request_data",
+        attachment_type=allure.attachment_type.JSON
+    )
 
     return config
 
