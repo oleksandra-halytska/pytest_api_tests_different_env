@@ -1,2 +1,2 @@
-# pytest_api_tests_different_env-
+# pytest_api_tests_different_envs
 Pytest Api testing with different enviroments
