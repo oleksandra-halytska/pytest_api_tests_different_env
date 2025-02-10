@@ -5,8 +5,12 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 permissions:
-  contents: read
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   Pytes-API-Testing:
     runs-on: ubuntu-latest
@@ -37,7 +41,7 @@ jobs:
       uses: simple-elf/allure-report-action@v1.7
       with:
         gh_pages: allure-report
-        allure_results: build/allure-results
+        allure_results: ./allure-results
         allure_history: allure-history
 
     - name: Publish test report
